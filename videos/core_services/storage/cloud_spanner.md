@@ -15,3 +15,14 @@ A cloud spanner instance replicates data in _end cloud zones_ which can be withi
 This allows for HA without failover, as well as global placement.
 Data replication is synchronised using Google's global fiber network.
 Atomic clocks ensure adamiscity whenever you are making updates.
+
+## How it works
+1. Cloud spanner divides rows into chunks called _splits_. It does this based entirely on the `PRIMARY_KEY`
+1. Splits can move freely between the available compute nodes to scale out reads and writes
+1. It is guaranteed that there is only ever one node handling *writes* to a given split
+### Hotspotting
+This is when one node is consistently under heavier load than others.
+An example is due to a monotonically increasing primary key.
+The last split has to deal with all the writes, which exhausts the resources of the responsible node.
+This can also cause slow reads, since e.g. a read for the last row has to wait until a pending write transaction completes.
+The solution is to randomise the primary key.
