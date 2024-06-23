@@ -21,9 +21,9 @@ Cloud Run builds the source and packages into a container image.
 It also handles HTTPS serving for you.
 
 ## Pricing
-You only pay for resources you use while a container is handling web requests or starting/shutting down.
+You only pay for resources you use while a container is handling web requests or starting/shutting down - by default, when Cloud Run finishes processing a request the CPU is severely throttled (though this is configurable).
 There is a small fee for every one million requests served.
-The price of container time icnreases with CPU and memory.
+The price of container time increases with CPU and memory.
 
 ## Languages
 Cloud Run can run any binary compiled for Linux 64-bit.
