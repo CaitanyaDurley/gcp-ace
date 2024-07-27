@@ -7,6 +7,7 @@
 1. How can you connect to a Windows Server VM in the fewest number of steps?
     * Install an RDP client locally, set a Windows username and password in the console and then log in - yes
     * Set a Windows username and password in the console, verify a firewall rule for port 3389 exists and click the RDP button in the Console - no, to RDP into a Windows server you must have an RDP client installed locally. This answer would only work if that is the case
+NB: A later version of this test claims the answers should be the other way round, since the first option omits the essential step of allowing port 3389 through the firewall. So who knows.
 1. How would you view data access logs?
     * Go to the Audit log in the Console - yes, data access logs are a type of audit log
     * Go to Operation Suite and filter the logs - no, we want audit logs
@@ -47,3 +48,10 @@ There are two ways to SSH into a Linux VM:
     * Deploy the monitoring pod in a StatefulSet - no
     * Deploy the monitoring pod in a DaemonSet - yes, a DaemonSet is deployed to every node, and container metrics can be obtained from every pod in the cluster
     * Ask developers to reference the monitoring pod in their deployments - no
+1. How can a Cloud SQL instance be made to support point in time recovery?
+    * Use failover replicas - no, this provides HA but does not support point in time recovery
+    * Use binary logging - yes, this records changes to the database, so you can restore to a specific point of time
+Point in time recovery is the ability to rollback to the database state at a specific point in time in case of data loss or corruption
+1. You have multiple gcloud configurations, including an inactive config with a k8s cluster. How can you review the K8s config in the fewest possible steps?
+    * Run `gcloud config configurations describe` - no, the question is unclear, but they want the kubernetes config not the gcloud config
+    * Run `kubectl config use-context` and `kubectl config view` - yes, this sets the appropriate k8s config and views it
