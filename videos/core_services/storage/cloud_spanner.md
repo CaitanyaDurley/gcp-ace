@@ -26,3 +26,7 @@ An example is due to a monotonically increasing primary key.
 The last split has to deal with all the writes, which exhausts the resources of the responsible node.
 This can also cause slow reads, since e.g. a read for the last row has to wait until a pending write transaction completes.
 The solution is to randomise the primary key.
+
+## When to scale out
+The recommended maximum CPU utilization for single-region Spanner instances is 65%.
+When this threshold is exceeded, you should add more nodes to the Spanner instance and take advantage of Spanner’s horizontal scalability

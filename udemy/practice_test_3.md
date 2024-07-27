@@ -11,3 +11,6 @@
 1. You have a Cloud SQL instance. The laws in your country require you to retain a month-end copy of the database for 3 years.
     * Create an export job that runs on the first of the month and writes the export file to a GCS bucket with the Archive class - no, there is no need for a manual job as automatic backups are a feature of Cloud SQL. Also requires manual removal of objects after three years.
     * Rely on the automatic first-of-the-month backup functionality. Set the bucket object auto-deletion to three years and use a bucket with the Archive class - yes, leverages Cloud SQL's automatic backup without manual intervention
+1. Your company has recently started using Cloud Identity. Some employees already have a Google account under your organisation's domain. How can you avoid conflicting accounts with Cloud Identity?
+    * Invite the user to transfer their existing account - yes, the existing account and data is retain, but now managed by Cloud Identity
+    * Invite the user to use an email alias - no, the account won't be centrally managed from the Admin Console, and so defeats the purporse of Cloud Identity
