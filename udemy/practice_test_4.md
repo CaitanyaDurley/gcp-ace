@@ -38,3 +38,6 @@ CREATE TABLE Users (
 1. Your company has BigQuery tables in many projects. You need to find all datasets which contain a column called _employeeNumber_. How can you do this with minimum effort?
     * Search for _employeeNumber_ in the search box in the Data Catalog - yes, the data catelog natively indexes BigQuery, GCS and Pub/Sub in the organisation.
     * Write a shell script to loop through the projects and search the tables using the `bq` CLI - no, this is more effort and slow
+1. How can you isolate pods when allowing untrusted code to be run within pods in a GKE cluster?
+    * Use the `cos_containerd` image for your GKE nodes - no, this is a minimal operating system designed for running containers, but does not provide isolation between pods
+    * Create a GKE node pool with a sandbox type of `gvisor`. Add the parameter `runtimeClassName: gvisor` to the spec of the pods - yes, the sandbox protects the host kernel on your nodes. gVisor is an open-source sandbox runtime that provides isolation for containers.
