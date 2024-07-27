@@ -4,6 +4,7 @@
 1. You nneed to provide access to compute images and disks to an external member of your team in one of your projects. What is the Google-recommended approach?
     * Use the `Compute Image User` role as the base for a custom role and add the `compute.disks.list` to the `includedPermissions` field. Grant the custom role at the project level - yes, this provides the user with the precise permissions they need
     * Grant the `Compute Storage Admin` role at the project level - no, this provides more than just list access, violating least privilege
+NB: The correct answer has since changed to "just add list permissions on disk and images" in a new version. So who knows.
 1. You need a Data Lake to process structured and unstructured data from millions of IoT devices. What option can be used to build a scalable and resilient architecture?
     * Use Dataflow to send data to GCS by streaming data into Pub/Sub - yes, Pub/Sub provides HA for streaming data and GCS provides durable storage for a data lake
     * Use Dataprep by Trifacta to send data to Bigtable by streaming data to Dataflow - no, Dataprep introduces unnecessary complexity
@@ -32,3 +33,12 @@
     * Develop an instance template with an appropriate structure for utilisation in the MIG. Ensure the removal of persistent disks sharing names with instance identifiers - yes, here "appropriate structure for utilisation in the MIG" means the disk name is distinct from the instance name. This will hence work
     * Validate the correctness of the instance template. Eliminate persistent disks mirroring instance names. Adjust the instance template to include the `disks.autoDelete` property set to true - no, while this would work, it overlooks that you can't "adjust" isntance templates
     * Any option that doesn't explicitly mention eliminating persistent disks with the same name as an instance - no
+1. How can you move all the projects from one organisation into another?
+    * Use the `projects.move` method - yes
+    * Assign yourself the Organisation Administrator role in both organisations and drag and drop the project within the Resource Manager from one organisation to the other - no, no such drag-and-drop interface
+1. You are building an internal web portal that will only be accessed during business hours. You need the app to scale to 0 when not in use.
+    * Cloud Functions - yes, scales to 0, even if its not ideal for a web portal
+    * Compute Engine - no, doesn't scale to 0
+1. You seek full control over K8s deployment while minimising the need to configure infrastructure extensively.
+    * GKE Autopilot - no, this limits control over the K8s deployment
+    * GKE Standard - yes, gives full control over the cluster infrastructure without having to manage the master components yourself
