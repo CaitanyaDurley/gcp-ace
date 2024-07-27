@@ -1,6 +1,6 @@
 1. Your app communicates with a licensing server on IP `10.194.3.41`. You need to migrate the licensing server to GCE, but you can't change your app's config to reach the licensing server at a different IP.
     * Reserve the IP as a static internal IP and assign it to the licensing server - yes
-    * Reserve the IP as a static internal IP and assign it to the licensing server - no, 10.* are not publically routable IPs
+    * Reserve the IP as a static external IP and assign it to the licensing server - no, 10.* are not publically routable IPs
 1. You are migrating your app to a Linux VM and your MySQL DB to Cloud SQL. Your security team has created a service account with the approrpriate permissions.
     * Specify the service account under the "Identity and API Access" section when creating the VM via the web console - yes
     * Download a JSON private key for the service account and add it to the custom metadata of the VM for the key "compute-engine-service-account" - no, this is insecure (and also wouldn't work)
@@ -43,7 +43,7 @@ There are two ways to SSH into a Linux VM:
 1. You need to scale up a VM.
     * Perform a live migration to a machine with more memory - no, live migration never changes the VM's configuration
     * Stop the VM, increase the memory, start the VM - yes, you cannot change the RAM without stopping the VM
-1. You have multiple apps running on a single GKE cluster. You want a single monitoring pod that sends container metrics to a third party monitoring solution. What is the simplest way to do this?
+1. You are the cluster admin for a single GKE cluster on which multiple teams' apps run. You want to centralise monitoring for all teams via a single monitoring pod that sends container metrics to a third party monitoring solution. What is the simplest way to do this?
     * Deploy the monitoring pod in a StatefulSet - no
     * Deploy the monitoring pod in a DaemonSet - yes, a DaemonSet is deployed to every node, and container metrics can be obtained from every pod in the cluster
     * Ask developers to reference the monitoring pod in their deployments - no
