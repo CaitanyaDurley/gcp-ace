@@ -37,4 +37,13 @@
     * Attach one service account to the GCE instances, make sure the service account has minimal rights. Impersonate a Cloud Identity user through a service account with elevated permissions to create/update/delete resources - no, impersonating a Cloud Identity user through a service account is not recommended due to the greater risk should the pipeline be compromised
     * Attach one service account to the GCE instances. Make sure all required IAM permissions to create/update/delete resources are added to the service account - no, this leads to one service account with excessive permissions. A service account should have a single responsibility, with least privilege for that responsibility.
     * Add appropriate IAM permissions to multiple service accounts. Store the key files of the service accounts using a secret manager and request the appropriate secrets during the execution of the pipeline - yes, the secret manager ensures the keys are encrypted and access is logged and auditable.
-
+1. How can you configure proxy settings for `gcloud` without credentials being present in the gcloud logs or on disk?
+    * Use `gcloud config set proxy/username` and `gcloud config set proxy/password` - no, this may cause the credentials to be present in plaintext within the CLI configuration
+    * Use the `CLOUDSDK_PROXY_USERNAME` AND `CLOUDSDK_PROXY_USERNAME` environment variables - yes
+1. When submitting a query in BigQuery, the query fails with a "quotaExceeded" error. How can you identify and resolve the issue? (Choose two)
+    * Use the INFORMATION_SCHEMA views - yes, this provides metadata about BigQuery resources including datasets, jobs and tables. From this you can understand the queries that have been run (e.g. high resource consumption)
+    * Search errors in Cloud Audit Logs - yes
+    * View errors in cloud monitoring - no, Cloud Monitoring is for monitoring performance and health rather than diagnosing errors
+1. Your company wants to deploy a web portal on Cloud Run. The portal must only be accessible through an internal IP address within your private VPC and your on-prem network. What should be used?
+    * Private Google Access - no, this is for accessing Google APIs and services. The portal would still have a public IP
+    * Private Service Connect - yes, private service connect "is a capability of Google Cloud networking that allows consumers to access managed services privately from inside their VPC network"
